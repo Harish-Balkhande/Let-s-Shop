@@ -29,12 +29,12 @@
   </a>
 </div>
 <!-- End Banner Slider -->
-{% endblock banner_slider %}
-
+{% endblock banner_slider %} 
+<!-- ============================================================================ -->
 {% block livesale %}
 <!-- Live Sale Section -->
 <div class="container">
-  <div class="row bg-danger text-center p-5 text-white border-bottom shadow">
+  <div class="row bg-danger text-center p-2 mt-2 text-white border-bottom shadow">
     <h1>SALE IS LIVE NOW</h1>
     <span>5% Instant Discount on Axis Bank Credit and Debit Card</span>
     <small class="fw-lighter">Term and Condition Applied (For details visit Bank's official Website)</small>
@@ -42,7 +42,7 @@
 </div> 
 <!-- End Live Sale Section -->
 {% endblock livesale %}
-
+<!-- ============================================================================== -->
 {% block main-content %}
 <!-- 1st Product Slider -->
 <div class="m-3">
@@ -50,12 +50,12 @@
  <!-- Slider 1 -->
  <div class="owl-carousel" id="slider1">
   {% for top in topwares %}
-  <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{top.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{top.title}}</span><br><span class="fs-5">Rs. {{top.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' top.id %}" class="btn"><div class="item"><img src="{{top.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{top.title}}</span><br><span class="fs-5">Rs. {{top.discounted_price}}</span></div></a>
   {% endfor %}
  </div>
 </div>
-<!-- End 1st Product Slider -->
-
+<!-- End 1st Product Slider --> <hr>
+<!-- ============================================================================= -->
 <!-- Payment Info Section -->
 <div class="container my-5">
  <div class="row">
@@ -89,7 +89,8 @@
   </div>
  </div>
 </div>
-<!-- End Payment Info Section -->
+<!-- End Payment Info Section --> <hr>
+<!-- ========================================================================== -->
 
 <!-- 2nd Product Slider -->
 <div class="mx-3">
@@ -97,34 +98,36 @@
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for btm in bottomwares %}
-  <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{btm.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{btm.title}}</span><br><span class="fs-5">Rs. {{btm.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' btm.id %}" class="btn"><div class="item"><img src="{{btm.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{btm.title}}</span><br><span class="fs-5">Rs. {{btm.discounted_price}}</span></div></a>
   {% endfor %}
  </div>
 </div>
 <!-- End 2nd Product Slider -->
-<br>
+<br><hr>
+<!-- =========================================================================== -->
 <!-- 3rd Product Slider -->
 <div class="mx-3">
   <h2>Mobie Phones</h2>
   <!-- Slider 3 -->
   <div class="owl-carousel" id="slider3">
    {% for mbl in mobiles %}
-   <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{mbl.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{mbl.title}}</span><br><span class="fs-5">Rs. {{mbl.discounted_price}}</span></div></a>
+   <a href="{% url 'product-detail' mbl.id %}" class="btn"><div class="item"><img src="{{mbl.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{mbl.title}}</span><br><span class="fs-5">Rs. {{mbl.discounted_price}}</span></div></a>
    {% endfor %}
   </div>
  </div>
  <!-- End 3rd Product Slider -->
-<br>
+<br><hr>
+<!-- ================================================================================== -->
  <div class="mx-3">
   <h2>Laptops</h2>
   <!-- Slider 4 -->
   <div class="owl-carousel" id="slider4">
    {% for lap in Laptops %}
-   <a href="{% url 'product-detail' %}" class="btn"><div class="item"><img src="{{lap.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{lap.title}}</span><br><span class="fs-5">Rs. {{lap.discounted_price}}</span></div></a>
+   <a href="{% url 'product-detail' lap.id %}" class="btn"><div class="item"><img src="{{lap.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{lap.title}}</span><br><span class="fs-5">Rs. {{lap.discounted_price}}</span></div></a>
    {% endfor %}
   </div>
  </div>
- End 4th Product Slider
-
+ <!-- End 4th Product Slider -->
+<hr>
 {% endblock main-content %}
 
