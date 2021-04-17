@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Cart, Product, OrderPlaced, Customer
+from .forms import CustomerRegistrationForm
+from django.contrib import messages
 
 class ProductView(View):
     def get(self, request):
@@ -31,17 +33,32 @@ def address(request):
 def orders(request):
  return render(request, 'app/orders.html')
 
-def change_password(request):
- return render(request, 'app/changepassword.html')
+# def change_password(request):
+#  return render(request, 'app/changepassword.html')
 
-def mobile(request):
- return render(request, 'app/mobile.html')
+def mobile(request, data=None):
+    print(data)
+    if data==None:
+        mobiles = Product.objects.filter(category='m')
+    elif data == 'Realme' or  data == 'Lava':
+        mobiles = Product.objects.filter(brand=data)
+    return render(request, 'app/mobile.html', {'mobiles':mobiles})
 
-def login(request):
- return render(request, 'app/login.html')
+# def login(request):
+#  return render(request, 'app/login.html')
 
-def customerregistration(request):
- return render(request, 'app/customerregistration.html')
+
+class CustomerRegisterationView(View):
+    def get(self,request):
+        form = CustomerRegistrationForm()
+        return render(request,"app/customerregistration.html",{'form':form})
+    def post(self,request):
+        form = CustomerRegistrationForm(request.POST)
+        if form.is_valid():
+            messages.success(request,"Registered Successfullly!")
+            form.save()
+            form = CustomerRegistrationForm()
+        return render(request,"app/customerregistration.html",{'form':form})
 
 def checkout(request):
  return render(request, 'app/checkout.html')
