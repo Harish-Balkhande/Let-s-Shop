@@ -14,7 +14,7 @@
         <div class="mb-2 fw-bolder">{{fm.label_tag}}</div> {{fm}} <small class="text-danger">{{fm.errors|striptags}}</small> <br>
     </div>    
     {% endfor %}
-    <small><a href="{% url 'passwordchange' %}" class="text-danger">Forget Password ?</a></small> <br>
+    <small><a href="{% url 'password-reset' %}" class="text-danger">Forget Password ?</a></small> <br>
     <input type="submit" value="Submit" class="btn btn-primary mt-4">
    </form>
   </div>
