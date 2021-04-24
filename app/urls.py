@@ -17,10 +17,18 @@ urlpatterns = [
     #-------------------------------Profile --------------------------------------
     path('profile/', views.ProfileView.as_view(), name='profile'),
     path('address/', views.address, name='address'),
+    
     path('orders/', views.orders, name='orders'),
-    path('cart/', views.add_to_cart, name='add-to-cart'),
+    # cart
+    path('add-to-cart/', views.add_to_cart, name='add-to-cart'),
+    path('cart/', views.show_cart, name='showcart'),
+    path('pluscart/', views.plus_cart),
+    path('minuscart/', views.minus_cart),
+    path('removeitem/', views.remove_item_in_cart),
+
     path('buy/', views.buy_now, name='buy-now'),
     path('checkout/', views.checkout, name='checkout'),
+    path('paymentdone/', views.payment_done, name="paymentdone"),
 
     # --------------- Manage Account(Using Django provided view) -----------------------------------
     # User sign-Up
@@ -32,7 +40,8 @@ urlpatterns = [
     # Password Change
     path('passwordchange/', auth_view.PasswordChangeView.as_view(template_name='app/passwordchange.html',form_class=MyPwdChangeForm, success_url='/pwdchangedone/'), name='passwordchange'),
     path('pwdchangedone/', auth_view.PasswordChangeView.as_view(template_name='app/pwdchangedone.html'), name="pwdchangedone"),
-    # -------------------Resetting Password ------------------------------------
+    
+    # -------------------Resetting Password(E-mail Authentication) ------------------------------------
     # Password Reset
     path('password-reset/', auth_view.PasswordResetView.as_view(template_name="app/pwd_reset.html", form_class=MyPwdResetForm), name='password-reset'),    
     # password reset done

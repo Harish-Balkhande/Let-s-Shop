@@ -2,14 +2,26 @@
  /* border: 1px solid black; */
  font-size: 24px;
  text-align: center;
- margin-top: 20px;;
+ margin-top: 20px;
+}
+.mybox{
+  margin-right: 40px;
+  margin-left: 30px;
+  background-color: aliceblue;
 }
 
 .owl-next{
- float:right;
+ /* float:right; */
+ position: absolute;
+ top: 30%;
+ right: -20px;
 }
 .owl-prev{
- float:left;
+ /* float:left; */
+ position: absolute;
+ top: 30%;
+ left: -10px;
+
 }
 .owl-prev span{
  font-size: 24px;
@@ -19,3 +31,4 @@
  font-size: 24px;
  font-weight: bold;
 }
+
