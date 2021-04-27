@@ -1,6 +1,10 @@
-.owl-carousel .item{
- /* border: 1px solid black; */
- font-size: 24px;
+/* Banner slider */
+.banner-img{
+  height: 350px;
+}
+
+/* Slider css */
+.owl-carousel .item{ 
  text-align: center;
  margin-top: 20px;
 }
@@ -9,26 +13,28 @@
   margin-left: 30px;
   background-color: aliceblue;
 }
-
+img{
+  height: 150px;
+}
+/* Carousel arrow position  */
 .owl-next{
  /* float:right; */
  position: absolute;
  top: 30%;
- right: -20px;
+ right: -20px; 
 }
-.owl-prev{
- /* float:left; */
+.owl-prev{ 
  position: absolute;
  top: 30%;
- left: -10px;
-
+ left: -10px; 
 }
+/* carousel arrow size */
 .owl-prev span{
- font-size: 24px;
+ font-size: 40px;
  font-weight: bold;
 }
 .owl-next span{
- font-size: 24px;
+ font-size: 40px;
  font-weight: bold;
 }
 

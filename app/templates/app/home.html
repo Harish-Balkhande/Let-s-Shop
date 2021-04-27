@@ -7,16 +7,16 @@
  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100" alt="..."> 
+      <img src="{% static 'app/images/banner/b1.jpg' %}" class="d-block w-100 banner-img" alt="..."> 
     </div>
     <div class="carousel-item">
-      <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100" alt="...">
+      <img src="{% static 'app/images/banner/b2.jpg' %}" class="d-block w-100 banner-img" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100" alt="...">
+      <img src="{% static 'app/images/banner/b3.jpg' %}" class="d-block w-100 banner-img" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="{% static 'app/images/banner/b4.jpg' %}" class="d-block w-100" alt="...">
+      <img src="{% static 'app/images/banner/b4.jpg' %}" class="d-block w-100 banner-img" alt="...">
     </div>
   </div>
   <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-bs-slide="prev">
@@ -49,15 +49,15 @@
 <!-- 1st Product Slider --> 
 
 <div class="mybox">
-  <h2>Top Wares</h2>
+  <h4>Top Wares</h4>
   <!-- Slider 2 -->
   <div class="owl-carousel" id="slider1">
    {% for top in topwares %}
     <a href="{% url 'product-detail' top.id %}" class="btn">
       <div class="item">
-        <img src="{{top.product_image.url}}" alt="" height="200px">
-        <span class="fw-bold">{{top.title}}</span><br>
-        <span class="fs-5">Rs. {{top.discounted_price}}</span>
+        <img src="{{top.product_image.url}}" alt="">
+        <span class="fs-5">{{top.title}}</span><br>
+        <span class="fs-6">Rs. {{top.discounted_price}}</span>
       </div>
     </a>
    {% endfor %}
@@ -105,11 +105,11 @@
 
 <!-- 2nd Product Slider -->
 <div class="mybox">
- <h2>Bottom Wares</h2>
+ <h4>Bottom Wares</h4>
  <!-- Slider 2 -->
  <div class="owl-carousel" id="slider2">
   {% for btm in bottomwares %}
-  <a href="{% url 'product-detail' btm.id %}" class="btn"><div class="item"><img src="{{btm.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{btm.title}}</span><br><span class="fs-5">Rs. {{btm.discounted_price}}</span></div></a>
+  <a href="{% url 'product-detail' btm.id %}" class="btn"><div class="item"><img src="{{btm.product_image.url}}" alt=""><span class="fs-5">{{btm.title}}</span><br><span class="fs-6">Rs. {{btm.discounted_price}}</span></div></a>
   {% endfor %}
  </div>
 </div>
@@ -117,30 +117,32 @@
 <br><hr>
 <!-- =========================================================================== -->
 <!-- 3rd Product Slider -->
-<div class="mx-3">
-  <h2>Mobie Phones</h2>
+<div class="mybox">
+  <h4>Mobie Phones</h4>
   <!-- Slider 3 -->
   <div class="owl-carousel" id="slider3">
    {% for mbl in mobiles %}
-   <a href="{% url 'product-detail' mbl.id %}" class="btn"><div class="item"><img src="{{mbl.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{mbl.title}}</span><br><span class="fs-5">Rs. {{mbl.discounted_price}}</span></div></a>
+   <a href="{% url 'product-detail' mbl.id %}" class="btn"><div class="item"><img src="{{mbl.product_image.url}}" alt=""><span class="fs-5">{{mbl.title}}</span><br><span class="fs-6">Rs. {{mbl.discounted_price}}</span></div></a>
    {% endfor %}
   </div>
  </div>
  <!-- End 3rd Product Slider -->
 <br><hr>
 <!-- ================================================================================== -->
- <div class="mx-3">
-  <h2>Laptops</h2>
+ <div class="mybox">
+  <h4>Laptops</h4>
   <!-- Slider 4 -->
   <div class="owl-carousel" id="slider4">
    {% for lap in Laptops %}
-   <a href="{% url 'product-detail' lap.id %}" class="btn"><div class="item"><img src="{{lap.product_image.url}}" alt="" height="200px"><span class="fw-bold">{{lap.title}}</span><br><span class="fs-5">Rs. {{lap.discounted_price}}</span></div></a>
+   <a href="{% url 'product-detail' lap.id %}" class="btn"><div class="item"><img src="{{lap.product_image.url}}" alt=""><span class="fs-5">{{lap.title}}</span><br><span class="fs-6">Rs. {{lap.discounted_price}}</span></div></a>
    {% endfor %}
   </div>
  </div>
  <!-- End 4th Product Slider -->
 <hr>
 
+<p>cart length: {{cartlength}}</p>
+<input type="hidden" value="{{cartlength}} id="cartquntity">
 {% endblock main-content %}
 
 

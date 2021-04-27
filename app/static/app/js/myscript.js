@@ -81,3 +81,13 @@ $('.remove-item').click(function (){
         }
     })
 })
+
+// show number of product in cart (cart banner)
+$(document).ready(function(){        
+    $.get("cartbadge/", function(data){        
+        var txt = "<span class=\"badge bg-danger\" >"+ data.badge +"</span>Cart"
+        if (data.badge != 0){
+            document.getElementById("cart-badge").innerHTML = txt
+        }        
+    })    
+})

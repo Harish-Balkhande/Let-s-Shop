@@ -9,6 +9,8 @@ urlpatterns = [
     #----------------------------- Home Page -----------------------------------
     path('', views.ProductView.as_view(), name="home"),    
     path('product-detail/<int:pk>/', views.ProductDetailView.as_view(), name="product-detail"),
+
+    path('cartbadge/', views.cart_badge),
     
     #------------------------------ Filter --------------------------------------
     path('mobile/', views.mobile, name='mobile'),

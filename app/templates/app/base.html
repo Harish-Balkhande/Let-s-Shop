@@ -28,69 +28,92 @@
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-     <div class="container">
-       <a class="navbar-brand" href="/"><b class="fw-bold fs-1">Let's Shop</b></a>
-       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="container">
+        <a class="navbar-brand" href="/"><b class="fw-bold fs-1">Let's Shop</b></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
          <span class="navbar-toggler-icon"></span>
-       </button>
-       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-           <li class="nav-item">
-             <a class="nav-link active" aria-current="page" href="/">Home</a>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Electronics
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
-               <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
-               <li><a class="dropdown-item" href="#">Laptop</a></li>
-             </ul>
-           </li>
-           <li class="nav-item dropdown">
-             <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-               Fashion
-             </a>
-             <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
-               <li><a class="dropdown-item" href="#">Top Wear</a></li>
-               <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
-             </ul>
-           </li>
-         </ul>
-         <form class="d-flex">
-           <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-           <button class="btn btn-warning" type="submit">S</button>
-         </form>
-         <div>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">          
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          {% if request.user.is_authenticated %} 
-           <li class="nav-item dropdown mx-2">
-              <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                {{request.user.username|capfirst}}
+            <!-- Home tab -->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="/">Home</a>
+            </li>
+            <!-- Home tab end -->
+
+            <!-- Electronics dropdown menu -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="electronicsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               Electronics
               </a>
-              <ul class="dropdown-menu" aria-labelledby="profileDropdown">
-                <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
-                <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
-                <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
-                <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+              <ul class="dropdown-menu" aria-labelledby="electronicsDropdown">
+                <li><a class="dropdown-item" href="{% url 'mobile' %}">Mobile</a></li>
+                <li><a class="dropdown-item" href="#">Laptop</a></li>
+               </ul>
+            </li>
+            <!-- Electronics dropdown menu end -->
+
+            <!-- Fashon dropdown menu -->
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle text-white" href="#" id="fashionDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+               Fashion
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="fashionDropdown">
+                <li><a class="dropdown-item" href="#">Top Wear</a></li>
+                <li><a class="dropdown-item" href="#">Bottom Wear</a></li>
               </ul>
             </li>
-            <li class="nav-item mx-2">
-             <a href="{% url 'showcart' %}" class="nav-link text-white"><span class="badge bg-danger">4</span> Cart </a>
-            </li>
-          {% else %}
-            <li class="nav-item mx-2">
-             <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
-            </li>
-            <li class="nav-item mx-2">
-             <a href="{% url 'customerregistration' %}" class="nav-link text-white">Sign-Up</a>
-            </li>
-          {% endif %}
+            <!-- Fashon dropdown menu end -->
           </ul>
-         </div>
-       </div>
-     </div>
-    </nav>
+
+        <!-- Search bar -->
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-warning" type="submit">S</button>
+        </form>
+        <!-- Search bar end -->
+        <div>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            {% if request.user.is_authenticated %} 
+              <li class="nav-item dropdown mx-2">
+                <a class="nav-link dropdown-toggle text-white" href="#" id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  {{request.user.username|capfirst}}
+                </a>
+
+                <!-- Profile dropdown menu -->
+                <ul class="dropdown-menu" aria-labelledby="profileDropdown">
+                  <li><a class="dropdown-item" href="{% url 'profile' %}">Profile</a></li>
+                  <li><a class="dropdown-item" href="{% url 'orders' %}">Orders</a></li>
+                  <li><a class="dropdown-item" href="{% url 'passwordchange' %}">Change Password</a></li>
+                  <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                </ul>
+                <!-- profile dropdown menu end -->
+              </li>
+
+              <!-- Cart option -->
+              <li class="nav-item mx-2">
+                <a href="{% url 'showcart' %}" class="nav-link text-white" id="cart-badge">
+                  <!-- <span class="badge bg-danger" ></span>  -->
+                  <!-- Cart badge is added dynamically from javascript -->
+                  Cart 
+                </a>
+              </li>
+              <!-- Cart option end -->
+            {% else %}
+            <!-- Login & signUp options -->
+              <li class="nav-item mx-2">
+                <a href="{% url 'login' %}" class="nav-link text-white">Login</a>
+              </li>
+              <li class="nav-item mx-2">
+                <a href="{% url 'customerregistration' %}" class="nav-link text-white">Sign-Up</a>  
+              </li>
+            <!-- Login & signUp options end -->
+            {% endif %}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>
     {% block banner_slider %} {% endblock banner_slider %}
     {% block livesale %} {% endblock livesale %}
     {% block main-content %} {% endblock main-content %}
@@ -110,10 +133,7 @@
     <script src="{% static 'app/js/popper.js' %}"></script>
     <script src="{% static 'app/js/bootstrap.js' %}"></script>
     <script src="{% static 'app/js/owl.carousel.min.js' %}"></script>
-    <script src="{% static 'app/js/all.min.js' %}"></script>    
-    <!-- <script src="{% static 'app/js/flickity.pkgd.min.js' %}"></script> -->
-    <!-- <script src="{% static 'app/js/flickity.min.js' %}"></script> -->
-    <!-- <script src="httcarousel-cell/unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script> -->
+    <script src="{% static 'app/js/all.min.js' %}"></script>        
     <script src="{% static 'app/js/myscript.js' %}"></script>
   </body>
 </html>

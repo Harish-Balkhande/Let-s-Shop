@@ -10,24 +10,40 @@ from django.contrib.auth.decorators import login_required
 # For class based view
 from django.utils.decorators import method_decorator
 
+# Home page
 class ProductView(View):
     def get(self, request):
         topwares = Product.objects.filter(category='TW')
         bottomwares = Product.objects.filter(category='BW')
         mobiles = Product.objects.filter(category='m')
-        laptops = Product.objects.filter(category='L')
+        laptops = Product.objects.filter(category='L')          
         context = {'topwares':topwares, 'bottomwares':bottomwares, 'mobiles':mobiles, 'Laptops':laptops}
         return render(request, "app/home.html", context)
 
+def cart_badge(request):
+    if request.user.is_authenticated:
+            cart_items = [p for p in Cart.objects.all() if p.user == request.user]  
+            cart_length = len(cart_items)  
+            print("cart : ",cart_length) 
+            data = {
+                'badge':cart_length
+            }
+            return JsonResponse(data)
+
+
+# Prduct detail page (add-to-cart & buy now options)
 class ProductDetailView(View):
     def get(self, request, pk):
         product = Product.objects.get(pk=pk)
         item_already_in_cart = False
         if request.user.is_authenticated:
-            # Checks if item is already in cart
+            # Checks if item is already in cart to prevent same product to be added in the cart.
             item_already_in_cart = Cart.objects.filter(Q(product=product.id) & Q(user=request.user)).exists()
         return render(request,'app/productdetail.html', {'product':product, 'item_already_in_cart':item_already_in_cart})
 
+# ------------------------------Cart --------------------------------------
+
+# Add product in the cart
 @login_required
 def add_to_cart(request):
     user = request.user
@@ -36,6 +52,7 @@ def add_to_cart(request):
     Cart(user=user,product=product).save()
     return redirect('/cart/')
 
+# Shows product added in the cart by the user if any
 @login_required
 def show_cart(request):
     if request.user.is_authenticated:
@@ -107,6 +124,7 @@ def minus_cart(request):
             }
             return JsonResponse(data)
 
+# Delete product from cart on 'Remove' button press
 def remove_item_in_cart(request):
     if request.method == "GET":
         prod_id = request.GET['prod_id']   
@@ -133,6 +151,11 @@ def remove_item_in_cart(request):
 def buy_now(request):
  return render(request, 'app/buynow.html')
 
+# -------------------------Profile ---------------------------------------------
+
+# Registration, Login, logOut, password change, password reset is done using Django provided Template view in urls.py
+
+# User profile registration form
 @method_decorator(login_required, name="dispatch")
 class ProfileView(View):
     def get(self,request):
@@ -153,19 +176,13 @@ class ProfileView(View):
             form = CustomerProfileForm()
             return render(request, "app/profile.html", {'form':form, 'active':'btn-primary'})
 
+# shows address in profile
 @login_required
 def address(request):
     addr = Customer.objects.filter(user=request.user)
     return render(request, 'app/address.html', {'address':addr, 'active':'btn-primary'})
 
-def mobile(request, data=None):
-    print(data)
-    if data==None:
-        mobiles = Product.objects.filter(category='m')
-    elif data == 'Realme' or  data == 'Lava':
-        mobiles = Product.objects.filter(brand=data)
-    return render(request, 'app/mobile.html', {'mobiles':mobiles})
-
+# Resgister new customer
 class CustomerRegisterationView(View):
     def get(self,request):
         form = CustomerRegistrationForm()
@@ -178,6 +195,20 @@ class CustomerRegisterationView(View):
             form = CustomerRegistrationForm()
         return render(request,"app/customerregistration.html",{'form':form})
 
+# -------------------------- Filter --------------------------------------
+
+# filter mobiles from product model
+def mobile(request, data=None):
+    print(data)
+    if data==None:
+        mobiles = Product.objects.filter(category='m')
+    elif data == 'Realme' or  data == 'Lava':
+        mobiles = Product.objects.filter(brand=data)
+    return render(request, 'app/mobile.html', {'mobiles':mobiles})
+
+# ------------------------- Order placing --------------------------------
+
+# Procced order for payment
 @login_required
 def checkout(request):
     user = request.user    
@@ -194,6 +225,7 @@ def checkout(request):
         total_amt = amount + shipping_amt     
         return render(request, 'app/checkout.html', {'address':addr, 'total':total_amt,'cart_items':cart_items})
 
+# On placing the order delete the item in cart and saves the detail into 'orders'
 @login_required
 def payment_done(request):
     user = request.user
@@ -208,6 +240,7 @@ def payment_done(request):
         c.delete()
     return redirect("orders")
 
+# Shows placed orders
 @login_required
 def orders(request):
     ord_placed = OrderPlaced.objects.filter(user=request.user)
