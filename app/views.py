@@ -22,13 +22,13 @@ class ProductView(View):
 
 def cart_badge(request):
     if request.user.is_authenticated:
-            cart_items = [p for p in Cart.objects.all() if p.user == request.user]  
-            cart_length = len(cart_items)  
-            print("cart : ",cart_length) 
-            data = {
-                'badge':cart_length
-            }
-            return JsonResponse(data)
+        cart_items = [p for p in Cart.objects.all() if p.user == request.user]  
+        cart_length = len(cart_items)  
+        # print("cart : ",cart_length) 
+        data = {
+            'badge':cart_length
+        }
+        return JsonResponse(data)
 
 
 # Prduct detail page (add-to-cart & buy now options)
